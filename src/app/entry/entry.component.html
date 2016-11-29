@@ -1,0 +1,34 @@
+
+
+      <form class="ui form" [formGroup]="acmForm" novalidate (ngSubmit)="save(acmForm)">
+        <div class="field">
+          <label>Form Name</label>
+          <input type="text" class="form-control" formControlName="form_name">
+          <small *ngIf="!acmForm.controls.form_name.valid" class="text-danger">
+              Name is required (minimum 5 characters).
+            </small>
+        </div>
+        
+        <div formArrayName="custom_fields">
+          <div *ngFor="let custom_field of acmForm.controls.custom_fields.controls; let i=index" class="panel panel-default">
+
+            <div class="field" [formGroupName]="i">
+              <customfield (removeFField)="removeField($event)" [group]="acmForm.controls.custom_fields.controls[i]" [fieldnumber]="i+1"></customfield>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div>
+          <button class="ui blue button" (click)="addField()"><i class="plus icon"></i>Add Field</button>
+          <button class="ui blue button" [disabled]="!acmForm.valid">Submit</button>
+        </div>
+        <div class="clearfix"></div>
+
+        <div>
+          <div>acmForm details:-</div>
+          <pre>Is acmForm valid?: <br>{{acmForm.valid | json}}</pre>
+          <pre>form value: <br>{{acmForm.value | json}}</pre>
+        </div>
+      </form>

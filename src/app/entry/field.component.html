@@ -1,0 +1,14 @@
+<div class="field" [formGroup]="fieldForm">
+
+<i class="remove icon" (click)="remove()"></i>
+    <div class="ui input">
+        <label>Field Name {{fieldnumber}}</label>
+        <input type="text" class="form-control" formControlName="field_name">
+
+    </div>
+    <div class="ui input">
+        <label>Field Value</label>
+        <input type="text" class="form-control" formControlName="field_value">
+    </div>
+
+</div>

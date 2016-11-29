@@ -1,0 +1,19 @@
+h4.ui.dividing.header ACM Form
+form.ui.form([formGroup]="acmForm" novalidate (ngSubmit)="save(acmForm)")
+  // JSON loaded fields will go here.
+  div.field
+    label Form Name
+    input.form-control(type="text" formControlName="form_name")
+
+  div(formArrayName="custom_fields")
+    div(*ngFor="let custom_field of acmForm.controls.custom_fields.controls; let i=index")
+      //- div([formGroupName]="i")
+      customfield((removeFField)="removeField($event)" [group]="acmForm.controls.custom_fields.controls[i]" [fieldnumber]="i+1")
+  div
+    button.ui.blue.button((click)="addField()")
+      i.plus.icon()
+      | Add Field
+  div.classfix
+  div
+    div ACM Form Details:
+    pre Form Value {{acmForm.value | json}}

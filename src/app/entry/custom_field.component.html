@@ -1,0 +1,24 @@
+<div [formGroup]="fieldForm">
+
+  <div class="ui buttons" *ngIf="!stage_switch">
+    <button class="ui button" (click)="remove()">Cancel</button>
+    <div class="or"></div>
+    <button class="ui button" (click)="nextStage()">Next</button>
+  </div>
+  <div class="ui buttons" *ngIf="stage_switch">
+    <button class="ui button" (click)="remove()">Cancel</button>
+    <div class="or"></div>
+    <button class="ui button" (click)="backStage()">Back</button>
+  </div>
+  <label *ngIf="!stage_switch">{{fieldnumber}}. Field Name</label>
+
+      <div class="ui input" *ngIf="!stage_switch">
+          <label>Field Name {{fieldhat.value}}</label>
+          <input ref-fieldhat (keyup)='0' type="text" class="form-control" formControlName="field_name">
+      </div>
+      <div class="ui input" *ngIf="stage_switch">
+          <label>Field Value {{fieldhat.value}}</label>
+          <input  type="text" class="form-control" formControlName="field_value">
+      </div>
+
+</div>

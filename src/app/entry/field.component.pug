@@ -1,0 +1,10 @@
+div.field([formGroup]="fieldForm")
+  button.circular.ui.icon.button
+    i.icon.remove((click)="remove()")
+  label {{fieldnumber}}. Custom Field
+  div
+    label Field Name
+    input.form-control(type='text' formControlName='field_name')
+  div
+    label Field value
+    input.form-control(type='text' formControlName='field_value')
