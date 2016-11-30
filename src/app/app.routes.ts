@@ -8,7 +8,7 @@ import { SearchComponent }      from './search/search.component';
 import { TableComponent }  from './table/table.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/entry', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'entry',  component: EntryComponent },
   { path: 'search', component: SearchComponent },

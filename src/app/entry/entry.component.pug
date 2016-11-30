@@ -1,19 +1,44 @@
 h4.ui.dividing.header ACM Form
-form.ui.form([formGroup]="acmForm" novalidate (ngSubmit)="save(acmForm)")
-  // JSON loaded fields will go here.
-  div.field
-    label Form Name
-    input.form-control(type="text" formControlName="form_name")
+div.ui.form
+  form.ui.form([formGroup]="acmForm" novalidate (ngSubmit)="save(acmForm)")
+    // JSON loaded fields will go here.
+    div.field
+      label 1. Form Name
+      input.form-control(type="text" formControlName="form_name")
 
-  div(formArrayName="custom_fields")
-    div(*ngFor="let custom_field of acmForm.controls.custom_fields.controls; let i=index")
-      //- div([formGroupName]="i")
-      customfield((removeFField)="removeField($event)" [group]="acmForm.controls.custom_fields.controls[i]" [fieldnumber]="i+1")
-  div
-    button.ui.blue.button((click)="addField()")
-      i.plus.icon()
-      | Add Field
-  div.classfix
-  div
-    div ACM Form Details:
-    pre Form Value {{acmForm.value | json}}
+    div.field
+      label 2. Start Date
+      input.form-control(type="text" formControlName="start_date")
+
+    div.field
+      label 3. Start Time
+      input.form-control(type="text" formControlName="start_time")
+
+    div.field
+      label 4. End Date
+      input.form-control(type="text" formControlName="end_date")
+
+    div.field
+      label 5. End Time
+      input.form-control(type="text" formControlName="end_time")
+
+
+    div(formArrayName="custom_fields")
+      div.field(*ngFor="let custom_field of acmForm.controls.custom_fields.controls; let i=index")
+        //- div([formGroupName]="i")
+        customfield((removeFField)="removeField($event)" [group]="acmForm.controls.custom_fields.controls[i]" [fieldnumber]="i+6")
+
+    div.ui.divider
+    div.field
+      button.ui.blue.button((click)="addField()")
+        i.plus.icon()
+        | Add Field
+      button.ui.black.secondary.button(*ngIf="show_json" (click)="show_json=!show_json")
+        i.hide.icon()
+        | Hide JSON
+      button.ui.black.secondary.button(*ngIf="!show_json" (click)="show_json=!show_json")
+        i.unhide.icon()
+        | Show JSON
+      div.classfix
+      div(*ngIf="show_json")
+        pre Form Value {{acmForm.value | json}}

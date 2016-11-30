@@ -4,8 +4,19 @@
   right: 0px;
 }*/
 
-div.ui.buttons
+/*div.ui.buttons
 {
+  position: absolute;
+  right: 0px;
+}*/
+
+
+
+
+
+button.ui.icon.button.circular
+{
+  margin-bottom: 10px;
   position: absolute;
   right: 0px;
 }

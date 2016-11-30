@@ -1,37 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { CustomFieldComponent } from './custom_field.component'
 import { ACMForm } from './acm_form.interface';
+import { EntryService } from './entry.service';
+
+
+import './rxjs-operators'
 
 
 @Component({
   // moduleId: module.id,
   selector: 'my-entry',
-  // styleUrls: ['.entry.component.css'],
+  styleUrls: ['./entry.component.css'],
   templateUrl: './entry.component.pug',
-  // template: require('./entry.component.pug')
-  // template:`
-  // <p>Table Boo</p>
-  // `
+  providers: [ EntryService ]
+
 })
 export class EntryComponent implements OnInit {
     public acmForm: FormGroup;
+    public main_fields;
+    private show_json: boolean;
 
 
-    constructor(private _fb: FormBuilder) { }
+    constructor(private _fb: FormBuilder, private _entry_service : EntryService) {
+        this.main_fields = {};
+    }
 
 
 
 
     ngOnInit() {
+        // this.getFormData();
+        // console.log(this.form_data[1]);
+        this.show_json = true;
         this.acmForm = this._fb.group({
-                form_name: ['', [Validators.required, Validators.minLength(5)]],
+                form_name: [''],
+                start_date: [''],
+                start_time: [''],
+                end_date: [''],
+                end_time: [''],
+
                 custom_fields: this._fb.array([
                     this.initField()
                 ])
         });
+        console.log(this.main_fields.length);
     }
+
+    // initMainFields() {
+    //     our_main_fields = this._fb.array([]);
+    //     for (let field of this.main_fields) {
+    //
+    //     }
+    // }
 
     initField() {
         return this._fb.group({
@@ -53,6 +74,14 @@ export class EntryComponent implements OnInit {
 
     save() {
         console.log('model');
+    }
+
+    getFormData() {
+        this._entry_service.getForm().subscribe(
+            data => {this.main_fields = data},
+            err => console.error(err),
+            () => console.log('done loading foods')
+        );
     }
 
 }

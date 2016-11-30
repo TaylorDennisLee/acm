@@ -1,19 +1,35 @@
 div.field([formGroup]="fieldForm")
   //- button.circular.ui.icon.button
-  //-   i.icon.remove((click)="remove()")
-  div.ui.buttons(*ngIf="!stage_switch")
-    button.ui.button((click)="remove()") Cancel
-    div.or
-    button.ui.button((click)="nextStage()") Next
-  div.ui.buttons(*ngIf="stage_switch")
-    button.ui.button((click)="remove()") Cancel
-    div.or
-    button.ui.button((click)="backStage()") Back
-  label(*ngIf="!stage_switch") {{fieldnumber}}. Custom Field
-  div(*ngIf="!stage_switch")
-    label Field Name {{fieldname.value}}
-    input.form-control(type='text' formControlName='field_name')
-  label(*ngIf="stage_switch") {{fieldnumber}}. {{fieldname.value}}
-  div(*ngIf="stage_switch")
-    label Field Value
-    input.form-control(type='text' formControlName='field_value')
+  //- div.ui.buttons(*ngIf="!stage_switch")
+  //-   button.ui.button((click)="remove()") Cancel
+  //-   div.or
+  //-   button.ui.button((click)="nextStage()") Next
+
+      //- <label>Make my profile visible</label>
+  //- div.ui.buttons(*ngIf="stage_switch")
+  //-   button.ui.button((click)="remove()") Cancel
+  //-   div.or
+  //-   button.ui.button((click)="backStage()") Back
+
+
+  //- div.ui.toggle.checkbox
+  //-   input(type='checkbox' name='toggle' (change)="stage_switch = !stage_switch")
+  //-   label Next
+  button.ui.mini.icon.button.circular((click)="remove()")
+    i.icon.remove.circle.outline
+
+  label(*ngIf="!stage_switch" ) {{fieldnumber}}. Custom Field - {{ fn }}
+  div.ui.input(*ngIf="!stage_switch" )
+    //- label Field Name
+    button.ui.button.labeled.icon((click)="stage_switch = !stage_switch") Next
+      i.chevron.right.icon.circle
+    input([(ngModel)]='fn' type='text' formControlName='field_name' )
+
+  label(*ngIf="stage_switch") {{fieldnumber}}. {{ fn }}
+  div.ui.input(*ngIf="stage_switch" )
+    //- label Field Value
+    button.ui.button.labeled.icon((click)="stage_switch = !stage_switch")
+      i.chevron.left.icon.circle
+      | Back
+    input(type='text' formControlName='field_value')
+    //- i.remove.icon.link.circular.inverted((click)="remove()")
